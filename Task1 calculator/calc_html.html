@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      background: #000000;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calc-box {
+      background-color: #3498db;
+      padding: 20px;
+      border-radius: 20px;
+      width: 300px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    }
+
+    #screen {
+      width: 100%;
+      height: 60px;
+      font-size: 26px;
+      text-align: right;
+      padding: 10px;
+      border: none;
+      background-color: #cccccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      color: #000;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .buttons button {
+      height: 60px;
+      font-size: 22px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.1s;
+    }
+
+    .number {
+      background-color: #ffffff;
+      color: black;
+    }
+
+    .operator {
+      background-color: #000000;
+      color: white;
+    }
+
+    .clear {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .equal {
+      background-color: #000000;
+      color: white;
+    }
+
+    .buttons button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="calc-box">
+    <input type="text" id="screen" readonly>
+
+    <div class="buttons">
+      <button class="number" onclick="addToScreen('1')">1</button>
+      <button class="number" onclick="addToScreen('2')">2</button>
+      <button class="number" onclick="addToScreen('3')">3</button>
+      <button class="operator" onclick="addToScreen('+')">+</button>
+
+      <button class="number" onclick="addToScreen('4')">4</button>
+      <button class="number" onclick="addToScreen('5')">5</button>
+      <button class="number" onclick="addToScreen('6')">6</button>
+      <button class="operator" onclick="addToScreen('*')">×</button>
+
+      <button class="number" onclick="addToScreen('7')">7</button>
+      <button class="number" onclick="addToScreen('8')">8</button>
+      <button class="number" onclick="addToScreen('9')">9</button>
+      <button class="operator" onclick="addToScreen('-')">−</button>
+
+      <button class="clear" onclick="clearScreen()">AC</button>
+      <button class="number" onclick="addToScreen('0')">0</button>
+      <button class="operator" onclick="addToScreen('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    function addToScreen(value) {
+      document.getElementById("screen").value += value;
+    }
+
+    function clearScreen() {
+      document.getElementById("screen").value = "";
+    }
+
+    function calculate() {
+      let expression = document.getElementById("screen").value;
+      try {
+        let result = eval(expression);
+        document.getElementById("screen").value = result;
+      } catch (e) {
+        document.getElementById("screen").value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>

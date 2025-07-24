@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>to do list</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            font-family: Arial;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .main {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #myinput {
+            width: 250px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        #addbtn {
+            padding: 10px;
+            background: green;
+            color: white;
+        }
+
+        .listarea {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .section {
+            width: 45%;
+            background: #333;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .section h2 {
+            text-align: center;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            background: #444;
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .btnz {
+            display: flex;
+            gap: 5px;
+        }
+
+        .timez {
+            font-size: 10px;
+            color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>To do app</h1>
+    <div class="main">
+        <input id="myinput" type="text" placeholder="enter task">
+        <button id="addbtn" onclick="additem()">Add</button>
+    </div>
+
+    <div class="listarea">
+        <div class="section">
+            <h2>Todo</h2>
+            <ul id="todoList"></ul>
+        </div>
+        <div class="section">
+            <h2>Done</h2>
+            <ul id="doneList"></ul>
+        </div>
+    </div>
+
+    <script>
+        function additem() {
+            var txt = document.getElementById("myinput").value;
+            if (txt == "") return;
+
+            var li = document.createElement("li");
+            var span = document.createElement("span");
+            span.innerText = txt;
+
+            var time = document.createElement("div");
+            time.className = "timez";
+            time.innerText = new Date().toLocaleString();
+
+            var box = document.createElement("div");
+            box.className = "btnz";
+
+            var okbtn = document.createElement("button");
+            okbtn.innerText = "done";
+            okbtn.onclick = function() {
+                document.getElementById("doneList").appendChild(li);
+                okbtn.remove();
+                time.innerText = "completed: " + new Date().toLocaleString();
+            }
+
+            var delbtn = document.createElement("button");
+            delbtn.innerText = "delete";
+            delbtn.onclick = function() {
+                li.remove();
+            }
+
+            box.appendChild(okbtn);
+            box.appendChild(delbtn);
+
+            li.appendChild(span);
+            li.appendChild(time);
+            li.appendChild(box);
+
+            document.getElementById("todoList").appendChild(li);
+            document.getElementById("myinput").value = "";
+        }
+    </script>
+</body>
+</html>

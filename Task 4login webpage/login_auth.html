@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>login page</title>
+  <style>
+    body {
+      background-color: #222;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #main {
+      background-color: #333;
+      padding: 20px;
+      width: 300px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      background: green;
+      color: white;
+      border: none;
+    }
+
+    #msg {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #switch {
+      background: transparent;
+      color: lightblue;
+      border: none;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <div id="login">
+      <h2>Login</h2>
+      <input type="text" id="loginUser" placeholder="username">
+      <input type="password" id="loginPass" placeholder="password">
+      <button onclick="log()">Login</button>
+      <div id="msg"></div>
+      <button id="switch" onclick="showReg()">Go to Register</button>
+    </div>
+
+    <div id="register" style="display:none">
+      <h2>Register</h2>
+      <input type="text" id="regUser" placeholder="username">
+      <input type="password" id="regPass" placeholder="password">
+      <button onclick="reg()">Register</button>
+      <div id="msg2"></div>
+      <button id="switch" onclick="showLogin()">Go to Login</button>
+    </div>
+  </div>
+
+  <script>
+    let users = []
+
+    function reg() {
+      let u = document.getElementById("regUser").value
+      let p = document.getElementById("regPass").value
+      users.push({u: u, p: p})
+      document.getElementById("regUser").value = ""
+      document.getElementById("regPass").value = ""
+      document.getElementById("msg2").innerText = "registered"
+    }
+
+    function log() {
+      let u = document.getElementById("loginUser").value
+      let p = document.getElementById("loginPass").value
+      let ok = false
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].u == u && users[i].p == p) {
+          ok = true
+        }
+      }
+      if (ok) {
+        document.getElementById("msg").innerText = "login ok"
+      } else {
+        document.getElementById("msg").innerText = "wrong info"
+      }
+    }
+
+    function showReg() {
+      document.getElementById("login").style.display = "none"
+      document.getElementById("register").style.display = "block"
+    }
+
+    function showLogin() {
+      document.getElementById("register").style.display = "none"
+      document.getElementById("login").style.display = "block"
+    }
+  </script>
+</body>
+</html>
